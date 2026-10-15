@@ -1,0 +1,231 @@
+/**
+ * Bagicha 2.0 - Admin Collapsible Sidebar & Password Toggle UI System
+ * Fully responsive across desktop, tablet, and mobile with light/dark theme support.
+ */
+
+/* ==========================================================================
+   1. DESKTOP COLLAPSIBLE SIDEBAR
+   ========================================================================== */
+.admin-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 1040;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1), transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.admin-sidebar-header {
+  padding: 1.15rem 1.25rem;
+  border-bottom: 1px solid var(--admin-border);
+  min-height: 65px;
+}
+
+.btn-sidebar-toggle {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94A3B8;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-sidebar-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--admin-primary);
+  border-color: var(--admin-primary);
+}
+
+/* Collapsed State on Desktop (>= 992px) */
+@media (min-width: 992px) {
+  body.sidebar-collapsed .admin-sidebar {
+    width: 76px;
+  }
+
+  body.sidebar-collapsed .admin-sidebar .brand-text,
+  body.sidebar-collapsed .admin-sidebar .nav-link-text,
+  body.sidebar-collapsed .admin-sidebar .admin-sidebar-section span,
+  body.sidebar-collapsed .admin-sidebar #themeToggleText {
+    display: none !important;
+  }
+
+  body.sidebar-collapsed .admin-sidebar-header {
+    padding: 1rem 0.5rem;
+    justify-content: center !important;
+    position: relative;
+  }
+
+  body.sidebar-collapsed .admin-sidebar .brand {
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+  }
+
+  body.sidebar-collapsed .btn-sidebar-toggle {
+    position: absolute;
+    bottom: -16px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+    background: var(--admin-bg-card);
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  body.sidebar-collapsed .admin-sidebar .nav-link-admin {
+    padding: 0.8rem 0;
+    justify-content: center;
+    border-left-width: 3px;
+  }
+
+  body.sidebar-collapsed .admin-sidebar .nav-link-admin i {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  body.sidebar-collapsed .admin-sidebar-section {
+    padding: 0.8rem 0;
+    text-align: center;
+    border-bottom: 1px solid var(--admin-border);
+    margin: 0.4rem 1rem;
+    font-size: 0;
+    height: 1px;
+  }
+
+  body.sidebar-collapsed .admin-sidebar #adminNotifBadge {
+    position: absolute;
+    top: 6px;
+    right: 14px;
+    font-size: 0.65rem;
+    padding: 0.25em 0.5em;
+  }
+
+  body.sidebar-collapsed .admin-sidebar .mt-auto button {
+    padding: 0.6rem 0;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   2. MOBILE & TABLET DRAWER (< 992px)
+   ========================================================================== */
+.admin-mobile-topbar {
+  background-color: var(--admin-bg-sidebar);
+  color: #F8FAFC;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  height: 60px;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1035;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.admin-sidebar-backdrop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 991.98px) {
+  .admin-wrapper {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 270px;
+    height: 100vh;
+    transform: translateX(-100%);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .admin-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .admin-content {
+    padding: 1.25rem 1rem;
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   3. UNIVERSAL PASSWORD TOGGLE (EYE ICON)
+   ========================================================================== */
+.password-toggle-group {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.password-toggle-group .form-control {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.btn-password-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.85rem;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  border-left: none !important;
+  background-color: transparent;
+  color: var(--admin-text-muted, #94a3b8);
+  border-color: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 4;
+}
+
+[data-bs-theme="light"] .btn-password-toggle {
+  border-color: #CBD5E1;
+  color: #64748B;
+}
+
+.btn-password-toggle:hover,
+.btn-password-toggle:focus {
+  color: var(--admin-primary, #10b981) !important;
+  background-color: rgba(16, 185, 129, 0.08);
+  border-color: var(--admin-primary, #10b981) !important;
+  outline: none;
+}
+
+.btn-password-toggle i {
+  font-size: 1.05rem;
+  pointer-events: none;
+  transition: transform 0.15s ease;
+}
+
+.btn-password-toggle:active i {
+  transform: scale(0.9);
+}
+
+/* Admin Logout Button */
+.btn-admin-logout { border-radius: 10px; font-weight: 600; transition: all 0.2s ease; }
+.btn-admin-logout:hover { background-color: #ef4444 !important; color: #ffffff !important; border-color: #ef4444 !important; }
+body.sidebar-collapsed .btn-admin-logout .nav-link-text { display: none !important; }
